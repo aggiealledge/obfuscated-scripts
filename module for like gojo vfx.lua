@@ -119,4 +119,26 @@ function module.shatter(parent, amount, char)
 	sfx:Destroy()
 end
 
+function module.palmvfx(char)
+	local part = vfxfolder.palmwindpart:Clone()
+	part.Parent = char
+	part.Anchored = false
+	
+	local att = part.Attachment
+	local dust = att.dust
+	local blast = att.windblast
+	local circle = att.windcircle
+	
+	local weld = Instance.new("Weld", part)
+	weld.Part0 = char.HumanoidRootPart
+	weld.Part1 = part
+	
+	dust:Emit(10)
+	blast:Emit(20)
+	circle:Emit(2)
+	
+	task.wait(1.5)
+	part:Destroy()
+end
+
 return module
