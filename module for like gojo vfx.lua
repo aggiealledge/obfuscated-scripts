@@ -6,6 +6,7 @@ game:GetService("ContentProvider"):PreloadAsync({vfxfolder})
 
 --local vfxfolder = workspace.bluevfx
 if vfxfolder then
+	print(vfxfolder)
 	vfxfolder.Parent = game:GetService("ReplicatedStorage")
 elseif not vfxfolder then
 	warn("whoops!!! no blue vfx")
