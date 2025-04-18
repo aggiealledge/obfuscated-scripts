@@ -66,4 +66,57 @@ function module.bluevfx(char)
 	end
 end
 
+local function randomglass(gui)
+	local texture
+	local r = Random.new()
+	
+	
+	--local frame = gui.ImageLabel
+	
+	local nframe = Instance.new("ImageLabel", gui)
+	nframe.ImageTransparency = 0.5
+	nframe.BackgroundTransparency = 1
+	--frame:Destroy()
+	local random = math.random(1, 2)
+	if random == 1 then
+		texture = "rbxassetid://6118439519"
+	elseif random == 2 then
+		texture = "rbxassetid://6118439008"
+	end
+	nframe.Name = "glass shard"
+	nframe.Image = texture
+	nframe.Size = UDim2.new(math.random(3, 8)/10, 0, math.random(3, 8)/10, 0)
+	nframe.Position = UDim2.new(r:NextNumber(0,0.8),0,r:NextNumber(-0.4,0.8),0)
+	nframe.Position += UDim2.fromScale(-0.07, 0)
+	nframe.Rotation = math.random(-90, 90)
+	nframe.Parent = gui
+	
+	--nframe:TweenPosition(nframe.Position + UDim2.fromScale(0, 1), Enum.EasingDirection.Out, Enum.EasingStyle.Cubic, 0.7)
+	--nframe:TweenSize(UDim2.fromScale(0, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Cubic, 0.7)
+	
+	ts:Create(nframe, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = UDim2.fromScale(0, 0)}):Play()
+	ts:Create(nframe, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Position = nframe.Position + UDim2.fromScale(0.1, 0.5)}):Play()
+end
+
+function module.shatter(parent, amount, char)
+	local sfx = Instance.new("Sound", char.Head)
+	sfx.SoundId = "rbxassetid://6737581315"
+	sfx.Volume = 3
+	sfx:Play()
+	
+	local gui = Instance.new("ScreenGui", parent)
+	gui.IgnoreGuiInset = true
+	gui.Name = "screenshatter"
+	for i = 1,amount do
+		randomglass(gui)
+	end
+	task.wait(1)
+	for i,v in pairs(gui:GetChildren()) do
+		v:Destroy()
+	end
+	gui:Destroy()
+	sfx.Ended:Wait()
+	sfx:Destroy()
+end
+
 return module
