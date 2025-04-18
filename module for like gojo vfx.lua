@@ -137,7 +137,7 @@ function module.palmvfx(char)
 	blast:Emit(20)
 	circle:Emit(2)
 	
-	task.wait(1.5)
+	task.wait(0.5)
 	part:Destroy()
 end
 
