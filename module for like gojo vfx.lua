@@ -1,12 +1,11 @@
 local ts = game:GetService("TweenService")
 
 local vfxid = 112948408449962
-local vfxfolder = game:GetObjects("rbxassetid;//"..vfxid)[1]
+local vfxfolder = game:GetObjects("rbxassetid://"..vfxid)[1]
 game:GetService("ContentProvider"):PreloadAsync({vfxfolder})
 
 --local vfxfolder = workspace.bluevfx
 if vfxfolder then
-	print(vfxfolder)
 	vfxfolder.Parent = game:GetService("ReplicatedStorage")
 elseif not vfxfolder then
 	warn("whoops!!! no blue vfx")
