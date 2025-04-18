@@ -74,7 +74,7 @@ local function randomglass(gui)
 	--local frame = gui.ImageLabel
 	
 	local nframe = Instance.new("ImageLabel", gui)
-	nframe.ImageTransparency = 0.5
+	nframe.ImageTransparency = 0.7
 	nframe.BackgroundTransparency = 1
 	--frame:Destroy()
 	local random = math.random(1, 2)
