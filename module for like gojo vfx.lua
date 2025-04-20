@@ -143,9 +143,11 @@ end
 
 function module.divevfx(part, bool)
 	if bool == true then
+		--[[
 		if divdb == true then
 			return
 		end
+		--]]
 		--divergent = true
 		divdb = true
 		
