@@ -153,7 +153,7 @@ function module.divevfx(part, bool, booli)
 		
 		local vfxpart = vfxfolder:WaitForChild("divergentarm")
 
-		if booli == true then
+		if booli then
 			local sound = Instance.new("Sound", vfxpart)
 			sound.SoundId = "rbxassetid://120714138513879"
 			sound.Volume = 2
