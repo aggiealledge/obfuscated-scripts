@@ -141,4 +141,77 @@ function module.palmvfx(char)
 	part:Destroy()
 end
 
+function module.divevfx(part, bool)
+	if bool == true then
+		if divdb == true then
+			return
+		end
+		--divergent = true
+		divdb = true
+		
+		local vfxpart = vfxfolder:WaitForChild("divergentarm")
+		
+		vfxpart = vfxpart:Clone()
+		vfxpart.Anchored = false
+		vfxpart.Parent = part.Parent
+
+		local weld = Instance.new("Weld", vfxpart)
+		weld.Part0 = part
+		weld.Part1 = vfxpart
+
+		local att = vfxpart.Attachment
+		for i,v in pairs(att:GetChildren()) do
+			if v:IsA("ParticleEmitter") then
+				if v.Name == "sparks" then
+					v:Emit(40)
+				else
+					v:Emit(40)
+					v.Enabled = true
+				end
+			end
+		end
+	elseif bool == false then
+		--divergent = false
+		divdb = false
+		
+		local vfxpart = part.Parent:FindFirstChild("divergentarm") --vfxfolder:WaitForChild("divergentarm")
+		
+		for i,v in pairs(vfxpart:GetDescendants()) do
+			if v:IsA("ParticleEmitter") or v:IsA("Trail") then
+				v.Enabled = false
+			end
+		end
+		wait(0.5)
+		vfxpart:Destroy()
+	end
+end
+
+function module.divergentboom(char, degree, cfr)
+	local div1 = vfxfolder.divergentmesh1:Clone()
+	div1.Parent = workspace
+	div1.Size = Vector3.new(2.9, 1.4, 2.9)
+	local div2 = vfxfolder.divergentmesh2:Clone()
+	div2.Parent = workspace
+	div2.Size = Vector3.new(2.5, 1, 2.5)
+	
+	div1.CFrame = char.HumanoidRootPart.CFrame * cfr * CFrame.Angles(degree, 0, 0)
+	div2.CFrame = char.HumanoidRootPart.CFrame * cfr * CFrame.Angles(degree, 0, 0)
+	
+	ts:Create(div1, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = Vector3.new(8, 3, 8)}):Play()
+	ts:Create(div2, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = Vector3.new(8.4, 3.4, 8.4)}):Play()
+	
+	ts:Create(div1, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency = 1}):Play()
+	ts:Create(div2, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency = 1}):Play()
+	
+	--ts:Create(div1, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {CFrame = div1.CFrame * CFrame.Angles(1.5, -1.5, -1.5)}):Play()
+	--ts:Create(div2, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {CFrame = div1.CFrame * CFrame.Angles(1.5, -1.5, -1.5)}):Play()
+	
+	div1.Changed:Connect(function()
+		if div1.Transparency == 1 then
+			div1:Destroy()
+			div2:Destroy()
+		end
+	end)
+end
+
 return module
