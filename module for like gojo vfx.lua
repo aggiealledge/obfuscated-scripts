@@ -152,6 +152,11 @@ function module.divevfx(part, bool)
 		divdb = true
 		
 		local vfxpart = vfxfolder:WaitForChild("divergentarm")
+
+		local sound = Instance.new("Sound", vfxpart)
+		sound.SoundId = "rbxassetid://120714138513879"
+		sound.Volume = 2
+		sound:Play()
 		
 		vfxpart = vfxpart:Clone()
 		vfxpart.Anchored = false
