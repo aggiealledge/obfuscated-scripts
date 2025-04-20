@@ -176,15 +176,19 @@ function module.divevfx(part, bool)
 		--divergent = false
 		divdb = false
 		
-		local vfxpart = part.Parent:FindFirstChild("divergentarm") --vfxfolder:WaitForChild("divergentarm")
+		--local vfxpart = part.Parent:FindFirstChild("divergentarm") --vfxfolder:WaitForChild("divergentarm")
 		
-		for i,v in pairs(vfxpart:GetDescendants()) do
-			if v:IsA("ParticleEmitter") or v:IsA("Trail") then
-				v.Enabled = false
+		for i,b in pairs(part.Parent:GetChildren()) do
+			if b.Name == "divergentarm" then
+				for i,v in pairs(b:GetDescendants()) do
+					if v:IsA("ParticleEmitter") or v:IsA("Trail") then
+						v.Enabled = false
+					end
+				end
+				wait(0.5)
+				b:Destroy()
 			end
 		end
-		wait(0.5)
-		vfxpart:Destroy()
 	end
 end
 
