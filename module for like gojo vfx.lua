@@ -141,7 +141,7 @@ function module.palmvfx(char)
 	part:Destroy()
 end
 
-function module.divevfx(part, bool, booli)
+function module.divevfx(part, bool, vol)
 	if bool == true then
 		--[[
 		if divdb == true then
@@ -152,19 +152,10 @@ function module.divevfx(part, bool, booli)
 		divdb = true
 		
 		local vfxpart = vfxfolder:WaitForChild("divergentarm")
-
-		if booli then
-			local sound = Instance.new("Sound", vfxpart)
-			sound.SoundId = "rbxassetid://120714138513879"
-			sound.Volume = 2
-			sound:Play()
-		elseif booli == false then
-			--print("NO SOUND. NO SOUND. NO SOUND. NO")
-		end
-
+		
 		local sound = Instance.new("Sound", vfxpart)
 		sound.SoundId = "rbxassetid://120714138513879"
-		sound.Volume = 2
+		sound.Volume = vol
 		sound:Play()
 		
 		vfxpart = vfxpart:Clone()
