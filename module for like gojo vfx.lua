@@ -158,6 +158,8 @@ function module.divevfx(part, bool, booli)
 			sound.SoundId = "rbxassetid://120714138513879"
 			sound.Volume = 2
 			sound:Play()
+		elseif booli == false then
+			--print("NO SOUND. NO SOUND. NO SOUND. NO")
 		end
 
 		local sound = Instance.new("Sound", vfxpart)
