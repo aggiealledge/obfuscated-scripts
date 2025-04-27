@@ -16,6 +16,9 @@ end
 local module = {}
 
 function module.bluevfx(char)
+	local plr = game.Players:GetPlayerFromCharacter(char)
+	local cam = workspace.CurrentCamera
+	
 	local blu = vfxfolder.blu
 	local part = vfxfolder.bluwindpart
 	local wind = vfxfolder.bluwind1
@@ -75,7 +78,7 @@ function module.bluevfx(char)
 	
 	blu.Changed:Connect(function()
 		if blu.Size == Vector3.new(1.7, 1.7, 8) then
-			ts:Create(workspace.CurrentCamera, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90})
+			ts:Create(cam, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90}):Play()
 			
 			stars1:Emit(5)
 			stars2:Emit(7)
@@ -88,7 +91,8 @@ function module.bluevfx(char)
 		elseif blu.Transparency == 1 then
 			blu:Destroy()
 			part:Destroy()
-			ts:Create(workspace.CurrentCamera, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90})
+			
+			ts:Create(cam, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 70}):Play()
 		end
 	end)
 	
@@ -257,6 +261,36 @@ function module.divergentboom(char, degree, cfr)
 			div2:Destroy()
 		end
 	end)
+end
+
+function module.divehit(char)
+	local cam = workspace.CurrentCamera
+	ts:Create(cam, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90}):Play()
+	
+	local part = vfxfolder.divergentstars:Clone()
+	part.Parent = char
+	part.CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1.5)
+	
+	local att = part.Attachment
+	
+	for i,v in pairs(att:GetChildren()) do
+		if v:IsA("ParticleEmitter") then
+			v:Emit(30)
+			v.Enabled = true
+			--task.wait(0.2)
+			--v.Enabled = false
+		end
+	end
+	task.wait(0.1)
+	for i,v in pairs(att:GetChildren()) do
+		if v:IsA("ParticleEmitter") then
+			v.Enabled = false
+		end
+	end
+	task.wait(0.1)
+	ts:Create(cam, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 70}):Play()
+	task.wait(0.4)
+	part:Destroy()
 end
 
 return module
