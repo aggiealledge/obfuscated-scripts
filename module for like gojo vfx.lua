@@ -19,7 +19,7 @@ function module.bluevfx(char)
 	local blu = vfxfolder.blu
 	local part = vfxfolder.bluwindpart
 	local wind = vfxfolder.bluwind1
-
+	
 	blu = blu:Clone()
 	blu.Parent = char
 	part = part:Clone()
@@ -27,42 +27,52 @@ function module.bluevfx(char)
 	part.Anchored = false
 	wind = wind:Clone()
 	wind.Parent = char
-
+	
 	local beam1 = part.beam1
 	local beam2 = part.beam2
-
+	
 	local stars1 = part.Attachment.stars1
 	local stars2 = part.Attachment.stars2
-
+	
 	local weld = Instance.new("Weld", part)
 	weld.Part0 = char.HumanoidRootPart
 	weld.Part1 = part
-
+	
 	blu.CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5)
 	blu.Size = Vector3.new(0.5, 0.5, 7.5)
-
-	ts:Create(blu, TweenInfo.new(0.3, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -70)}):Play()
-	ts:Create(blu, TweenInfo.new(0.3, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {Size = Vector3.new(5, 5, 1)}):Play()
-
-	--[[
+	
+	wind.CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5)
+	wind.Size = Vector3.new(10, 10, 6)	
+	
+	ts:Create(beam1, TweenInfo.new(1.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {TextureSpeed = 0}):Play()
+	ts:Create(beam2, TweenInfo.new(1.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {TextureSpeed = 0}):Play()
+	
+	ts:Create(wind, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = Vector3.new(17, 14, 64)}):Play()
+	ts:Create(wind, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -35)}):Play()
+	ts:Create(wind, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency = 1}):Play()
+	ts:Create(wind, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Color = Color3.fromRGB(171, 240, 255)}):Play()
+	
+	wind:GetPropertyChangedSignal("Transparency"):Connect(function()
+		if wind.Transparency == 1 then
+			wind:Destroy()
+		end
+	end)
+	
+	ts:Create(blu, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -70)}):Play()
+	ts:Create(blu, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.InOut), {Size = Vector3.new(5, 5, 1)}):Play()
+	
 	for i = 1, 0, 0.035 do
 		beam1.Transparency = NumberSequence.new(i,1)
 		beam2.Transparency = NumberSequence.new(i,1)
 
 		wait()
 	end
-	--]]
-
-	task.wait(0.1)
-
-	ts:Create(beam1, TweenInfo.new(1.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {TextureSpeed = 0}):Play()
-	ts:Create(beam2, TweenInfo.new(1.7, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {TextureSpeed = 0}):Play()
-
-	task.wait(0.3)
-
+	
+	task.wait(0.2)
+	
 	ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -7)}):Play()
 	ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {Size = Vector3.new(1.7, 1.7, 8)}):Play()
-
+	
 	blu.Changed:Connect(function()
 		if blu.Size == Vector3.new(1.7, 1.7, 8) then
 			stars1:Emit(5)
@@ -77,7 +87,7 @@ function module.bluevfx(char)
 			part:Destroy()
 		end
 	end)
-
+	
 	for i = 0, 1, 0.035 do
 		beam1.Transparency = NumberSequence.new(i,1)
 		beam2.Transparency = NumberSequence.new(i,1)
