@@ -70,25 +70,26 @@ function module.bluevfx(char)
 	
 	task.wait(0.2)
 	
-	ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -7)}):Play()
-	ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {Size = Vector3.new(1.7, 1.7, 8)}):Play()
+	ts:Create(blu, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -7)}):Play()
+	ts:Create(blu, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {Size = Vector3.new(1.7, 1.7, 8)}):Play()
 	
 	blu.Changed:Connect(function()
 		if blu.Size == Vector3.new(1.7, 1.7, 8) then
 			stars1:Emit(5)
 			stars2:Emit(7)
-			ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = Vector3.new(10, 10, 0.3)}):Play()
-			ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency = 1}):Play()
+			ts:Create(blu, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = Vector3.new(10, 10, 0.3)}):Play()
+			ts:Create(blu, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency = 1}):Play()
 			--ts:Create(blu.Highlight, TweenInfo.new(1, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {OutlineTransparency = 1}):Play()
-			ts:Create(blu.PointLight, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Brightness = 0}):Play()
-			ts:Create(blu, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {CFrame = blu.CFrame * CFrame.new(0, 0, 4)}):Play()
-			wait(0.5)
+			ts:Create(blu.PointLight, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Brightness = 0}):Play()
+			ts:Create(blu, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {CFrame = blu.CFrame * CFrame.new(0, 0, 4)}):Play()
+			--wait(0.4)
+		elseif blu.Transparency == 1 then
 			blu:Destroy()
 			part:Destroy()
 		end
 	end)
 	
-	for i = 0, 1, 0.035 do
+	for i = 0, 1, 0.05 do
 		beam1.Transparency = NumberSequence.new(i,1)
 		beam2.Transparency = NumberSequence.new(i,1)
 
