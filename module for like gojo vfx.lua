@@ -75,6 +75,8 @@ function module.bluevfx(char)
 	
 	blu.Changed:Connect(function()
 		if blu.Size == Vector3.new(1.7, 1.7, 8) then
+			ts:Create(workspace.CurrentCamera, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90})
+			
 			stars1:Emit(5)
 			stars2:Emit(7)
 			ts:Create(blu, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Size = Vector3.new(10, 10, 0.3)}):Play()
@@ -86,6 +88,7 @@ function module.bluevfx(char)
 		elseif blu.Transparency == 1 then
 			blu:Destroy()
 			part:Destroy()
+			ts:Create(workspace.CurrentCamera, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90})
 		end
 	end)
 	
