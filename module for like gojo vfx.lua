@@ -286,16 +286,15 @@ function module.divehit(char)
 			--v.Enabled = false
 		end
 	end
-	task.wait(0.1)
+	task.wait(0.2)
 	for i,v in pairs(att:GetChildren()) do
 		if v:IsA("ParticleEmitter") then
 			v.Enabled = false
 		end
 	end
-	task.wait(0.1)
+	--task.wait(0.1)
 	ts:Create(cam, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 70}):Play()
-	task.wait(0.4)
+	task.wait(0.5)
 	part:Destroy()
 end
-
 return module
