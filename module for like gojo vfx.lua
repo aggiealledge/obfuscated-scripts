@@ -267,6 +267,11 @@ function module.divehit(char)
 	local cam = workspace.CurrentCamera
 	ts:Create(cam, TweenInfo.new(0.2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {FieldOfView = 90}):Play()
 	
+	local sfx = Instance.new("Sound", char.Head)
+	sfx.SoundId = "rbxassetid://89209613603828"
+	sfx.Volume = 3
+	sfx:Play()
+	
 	local part = vfxfolder.divergentstars:Clone()
 	part.Parent = char
 	part.CFrame = char.HumanoidRootPart.CFrame * CFrame.new(0, 0, -1.5)
