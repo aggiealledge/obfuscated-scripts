@@ -269,7 +269,7 @@ function module.divehit(char)
 	
 	local sfx = Instance.new("Sound", char.Head)
 	sfx.SoundId = "rbxassetid://89209613603828"
-	sfx.Volume = 3
+	sfx.Volume = 4.5
 	sfx:Play()
 	
 	local part = vfxfolder.divergentstars:Clone()
